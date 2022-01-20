@@ -242,6 +242,7 @@
 					</div>
 				
 					<!-- 입력 테이블 -->
+					<c:if test="${dept_auth.auth_supplier eq 3}">
 					<div class="add_table"
 						style="width: 86vw; height: 6.3vh; margin-left: 1vw; margin-top: 5vh; text-align: center; border: 2px solid #769fcd; border-bottom: none;">
 						<!-- 제목 -->
@@ -275,6 +276,7 @@
 						</div>
 						
 					</div>
+					</c:if>
 					<script>
 					// 회계 데이터 입력
 					function submitkey() {

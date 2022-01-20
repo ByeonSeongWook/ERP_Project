@@ -12,7 +12,7 @@
     <!-- 네비 CSS -->
     <link rel="stylesheet" href="${path}/resources/css/erpNav.css" />
     <!-- 회계 CSS -->
-    <link rel="stylesheet" href="${path}/resources/css/account.css" />
+    <link rel="stylesheet" href="${path}/resources/css/user_main.css" />
     <!-- 부트스트랩 CSS -->
     <link rel="stylesheet" href="${path}/resources/css/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="${path}/resources/css/bootstrap/custom.css" />
@@ -27,19 +27,52 @@
 </head>
 <body>
 <div id="wrap">
-
+    
      <!-- 상단 bar -->
      <div id="topBar">
        <!-- 상단 제목 -->
-       <span>Main	</span>
+       <span>메인 페이지</span>
      </div>
-
-    
+     
     <!-- 유저 네비게이션 -->
     <jsp:include page = "userNav.jsp" />
     
 	<!-- contents 부분 -->
-	<div id="contents">
+	<div id="contents"  style="float: right; width: 88vw; height: 88vh;">
+	<!-- 내용적는 부분 -->
+           <div class="page_btn">
+               <div class="box_btn" OnClick="location.href ='pw_check'"><img src="${path}/resources/images/profile_white.png" alt=""></div>
+               <span>마이페이지</span>
+           </div>
+           <div class="page_btn">
+               <div class="box_btn" OnClick="location.href ='product'"><img src="${path}/resources/images/product_mng_white.png" alt=""></div>
+               <span>제품관리</span>
+           </div>
+           <div class="page_btn">
+                <div class="box_btn" OnClick="location.href ='salesList'"><img src="${path}/resources/images/sales_white.png" alt=""></div>
+                <span>영업관리</span>
+            </div>
+            
+            <div class="page_btn">
+                <div class="box_btn" OnClick="location.href ='supplier'"><img src="${path}/resources/images/supplier_white.png" alt=""></div>
+                <span>공급처관리</span>
+            </div>
+            <div class="page_btn">
+                <div class="box_btn" OnClick="location.href ='clients'"><img src="${path}/resources/images/client_white.png" alt=""></div>
+                <span>고객관리</span>
+            </div>
+            <div class="page_btn">
+                <div class="box_btn" OnClick="location.href ='orders'"><img src="${path}/resources/images/order_white.png" alt=""></div>
+                <span>발주관리</span>
+            </div>
+            <div class="page_btn">
+                <div class="box_btn" OnClick="location.href ='accounting'"><img src="${path}/resources/images/account_white.png" alt=""></div>
+                <span>회계</span>
+            </div>
+            <div class="page_btn">
+                <div class="box_btn" OnClick="location.href ='/logout'"><img src="${path}/resources/images/logout.png" alt=""></div>
+                <span>로그아웃</span>
+            </div>
 	</div>
 	
 </div>

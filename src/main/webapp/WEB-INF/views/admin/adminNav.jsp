@@ -14,8 +14,6 @@
     <!-- 부트스트랩 CSS -->
     <link rel="stylesheet" href="${path}/resources/css/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="${path}/resources/css/bootstrap/custom.css" />
-    <!-- 제이쿼리  -->
-    <script src="${path}/resources/js/jquery.js"></script>
     
 </head>
 
@@ -51,13 +49,20 @@
 	</div>
 	
   </body>
-      <script>
-      $(document).ready(function () {
-      	var url = window.location.pathname;
-      	if(url == '/admin/employee') $('#employeeNavItem').addClass('on');
-      	else if(url == '/admin/add_employee') $('#add_employeeNavItem').addClass('on');
-      	else if(url == '/admin/department') $('#departmentNavItem').addClass('on');
-      	else if(url == '/admin/correct_auth') $('#correct_authNavItem').addClass('on');
-      });
-      </script>
+  <script>
+  $(document).ready(function () {
+		/*** 네비게이션 add class ***/
+	  	var url = window.location.pathname;
+	  	if(url == '/admin/employee') $('#employeeNavItem').addClass('on');
+	  	else if(url == '/admin/add_employee') $('#add_employeeNavItem').addClass('on');
+	  	else if(url == '/admin/department') $('#departmentNavItem').addClass('on');
+	  	else if(url == '/admin/correct_auth') $('#correct_authNavItem').addClass('on');
+	  	
+	    /*** controller 에서 메시지 보내기 ***/
+		var msg = '${msg}';
+		if(msg != null && msg != '') alert(msg);
+  });
+  </script>
+      
+
 </html>

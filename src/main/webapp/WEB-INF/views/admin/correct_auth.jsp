@@ -288,7 +288,7 @@
 			<!-- 테이블 항목(왼쪽) -->
 				<div class="form-group col-sm-6 col-md-6 col-lg-6" class="table-responsive"	style="margin-left: 1%;">
 					
-					<div class="jumbotron" style="background-color: #f7fbfc; border: 2px solid #b9d7ea; height: 70vh">
+					<div class="jumbotron" style="background-color: #f7fbfc; border: 2px solid #b9d7ea; height: 80vh">
 					
 						<!-- 검색 폼, 테이블 -->
 
@@ -313,7 +313,7 @@
 			
 			
 						<!-- 부서목록 제목 -->
-						<h4 style="text-align: center; font-size: 20px; margin: 7% 0 3% 0">부서 목록</h4>
+						<h4 style="text-align: center; font-size: 20px; margin: 5% 0">부서 목록</h4>
 						
 						<!-- 테이블 항목 표시 -->
 						<div>
@@ -354,9 +354,9 @@
 
 
 				<!-- 수정 하는 화면(오른쪽) -->
-				<div class="form-group col-sm-6 col-md-6 col-lg-6" style="width: 430px; height: 100vh;">
+				<div class="form-group col-sm-6 col-md-6 col-lg-6" style="width: 25vw;">
 			
-					<div class="jumbotron" style="width: 100%; height: 70vh; background-color: #f7fbfc; border: 2px solid #b9d7ea">
+					<div class="jumbotron" style="width: 100%; height: 80vh; background-color: #f7fbfc; border: 2px solid #b9d7ea">
 												
 							<div class="row">
 							
@@ -371,12 +371,15 @@
 								
 								
 							</div>								<!-- 테이블 항목 -->
-							<div class="row" style="margin-top: 15%">
+							<div class="row" style="margin-top: 11%">
 								<table style="width: 100%; height: auto; text-align: center;" class="table borderless">
+									<tr>
+									<td colspan="3" style="text-align: right; font-size: 0.8em; color: #999; border-top: 0">모두 체크시 모든 권한 부여</td>
+									</tr>
 									<tr>
 										<td style="width: 40%; text-align: center">부서명</td>
 										<td style="width: 30%; text-align: center">검색</td>
-										<td style="width: 30%; text-align: center">수정</td>
+										<td style="width: 30%; text-align: center">등록</td>
 									</tr>
 								</table>
 							</div>
@@ -477,7 +480,7 @@
 							
 							
 							<!-- 등록, 수정 버튼 -->
-							<div class="row" style="margin-top: 20%">
+							<div class="row" style="margin-top: 10%">
 								<div class="form-group col-sm-12 col-md-12 col-lg-12">
 									<button type="button" class="btn btn-info form-control" id = "auth_update_btn" style="background-color: #769fcd; border: 1px solid #769fcd" onclick="auth_update()">등록</button>
 								</div>

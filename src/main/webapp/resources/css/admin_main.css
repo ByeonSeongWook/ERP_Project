@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+
+.page_btn{
+    margin: 7vh 3vw 0vh 5vw;
+    float: left;
+    width: 12vw;
+    height: 35vh;
+    text-align: center;
+}
+.box_btn{
+    float: left;
+    margin-bottom: 3vh;
+    width: 12vw;
+    height: 24vh;
+    background-color: #B9D7EA;
+    border-radius: 30px;
+    box-shadow: inset 10px 10px 30px 5px rgba(255, 255, 255, 0.6);
+    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.6));
+}
+.box_btn:hover{
+    cursor: pointer;
+    box-shadow: inset -5px -5px 10px 5px rgba(104, 104, 104, 0.6);
+    filter:none;
+}
+
+.box_btn img{
+    margin: 4vh 0 0 0vw;
+    width: 8vw;
+    height: 16vh;
+}
+.page_btn span{
+	font-size: 2rem;
+}

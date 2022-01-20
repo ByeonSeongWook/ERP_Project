@@ -16,17 +16,15 @@
 <!-- 네비 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/erpNav.css" />
 <!-- 부트스트랩 CSS -->
-<link rel="stylesheet"
-	href="${path}/resources/css/bootstrap/bootstrap.css" />
+<link rel="stylesheet" href="${path}/resources/css/bootstrap/bootstrap.css" />
 <link rel="stylesheet" href="${path}/resources/css/bootstrap/custom.css" />
 <!-- 부트스트랩 JS -->
 <script src="${path}/resources/js/bootstrap.js"></script>
-<!-- AJAX -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery.min.js"
-	charset="UTF-8"></script>
+
 <!-- 주소찾기 -->
 <script src="${path}/resources/js/address.js" charset="UTF-8"></script>
-
+<!-- AJAX -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery.min.js" charset="UTF-8"></script>
 <script>
 $(document).ready(function(){
 	//---  주소 검색 모달에서 주소 입력 시
@@ -53,7 +51,7 @@ $(document).ready(function(){
 				success : function(data) {
 						$('#user_num').val(data.user_num);	
 						$('#dept_num').val(data.dept_num);	
-						$('#dept_name').val(data.dept_name);	
+						$('#dept_name').val(data.dept_name);
 						$('#searchDeptModal').modal('hide');
 				}
 			})
@@ -78,10 +76,11 @@ $(document).ready(function(){
     <jsp:include page = "adminNav.jsp" />
 
 	<!-- 사원등록 컨테이너(Bootstrap) -->
-	<div id="contents" style="float: left; margin-top: 2%;">
+	<div id="contents" style=" float: right; width: 88%; height:100%; margin-top: 2%;">
 		<div class="container">
-			<div class="col-lg-3"></div>
-			<div class="col-lg-6">
+		<div class="row">
+			<div class="form-group col-sm-3 col-md-3 col-lg-3"></div>
+			<div class="form-group col-sm-6 col-md-6 col-lg-6">
 				<div class="jumbotron" style="background-color: #F7FBFC; background-color: #f7fbfc; border: 2px solid #b9d7ea;">
 					<form method="POST" action="./joinAction">
 						<h3 style="text-align: center; margin: -5% 0 10% 0;">사원등록</h3>
@@ -178,6 +177,8 @@ $(document).ready(function(){
 					</form>
 				</div>
 			</div>
+			<div class="form-group col-sm-3 col-md-3 col-lg-3"></div>
+		</div>
 		</div>
 	</div>
 </div>
@@ -230,19 +231,15 @@ $(document).ready(function(){
 			<div class="modal-body">
 				<div class="row" id="postcodify">
 					<script>
-						$('#postcodify')
-								.postcodify(
-										{
-											insertPostcode5 : '#entry_postcode5',
-											insertAddress : '#entry_address',
-											insertExtraInfo : '#entry_extra_info',
-											userFullJibeon : true,
-											mapLinkProvider : 'google',
+						$('#postcodify').postcodify({
+											insertPostcode5 	: '#entry_postcode5',
+											insertAddress 		: '#entry_address',
+											insertExtraInfo 		: '#entry_extra_info',
+											userFullJibeon 		: true,
+											mapLinkProvider 	: 'google',
 
 											ready : function() {
-												$(
-														'#postcodify div.postcode_search_status.empty')
-														.hide();
+												$('#postcodify div.postcode_search_status.empty').hide();
 											},
 
 											beforeSearch : function() {
@@ -251,12 +248,8 @@ $(document).ready(function(){
 
 											afterSearch : function(
 													selectedEntry) {
-												$(
-														'#postcodify div.postcode_search_result')
-														.remove();
-												$(
-														'#postcodify div.postcode_search_status.summary')
-														.hide();
+												$('#postcodify div.postcode_search_result').remove();
+												$('#postcodify div.postcode_search_status.summary').hide();
 												$('#entry_box').show();
 												$('#entry_details').focus();
 											}

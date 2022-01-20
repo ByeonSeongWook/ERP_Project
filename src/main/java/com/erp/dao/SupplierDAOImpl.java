@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.erp.vo.Department;
 import com.erp.vo.Supplier;
 
 // user 공급처
@@ -51,6 +52,11 @@ public class SupplierDAOImpl implements SupplierDAO {
 	@Override
 	public void updateSupplier(Supplier supplier) throws Exception {
 		sqlSession.update(SESSION + ".updateSupplier", supplier);
+	}
+
+	@Override
+	public Department getAuth(String dept_num) throws Exception {
+		return sqlSession.selectOne(SESSION + ".getAuth", dept_num);
 	}
 
 	

@@ -61,17 +61,22 @@ $(document).ready(function(){
 				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].user_num+'</td>';
 				          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].user_tel+'</td>';
 				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_type+'</td>';
-				          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
-				          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
-				          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
-				          				str += 'onclick="getSuppID('+data[i].supp_id+')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
-			          				str += '</tr>';
+							              
+				          				str += '<c:if test="${dept_auth.auth_supplier eq 3}">';
+							          	str +=  '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
+								        	str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
+								        	str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"'; 
+								        	str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button>';
+								        	str += '</td></c:if>';
+								        	
+								        	str += '<c:if test="${dept_auth.auth_supplier ne 3}">';     
+								        	str += '<td style="width: 15vw; text-align: center; line-height: 30px" colspan ="2">'+data[i].supp_note+'</td></c:if>';
+								        	str += '</tr>';
 									}
 		      				str += '</table>';
 						$('#suppTableList').append(str); 
 						
 				}
-			
 			
 		});
 		
@@ -140,7 +145,7 @@ $(document).ready(function(){
 			          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
 			          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
 			          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
-			          				str += 'onclick="getSuppID('+data[i].supp_id+')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
+			          				str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
 	          					str += '</tr>';
 								}
 	      				str += '</table>';
@@ -205,7 +210,7 @@ $(document).ready(function(){
 		          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
 		          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
 		          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
-		          				str += 'onclick="getSuppID('+data[i].supp_id+')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
+		          				str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
 	      					str += '</tr>';
 							}
 		  				str += '</table>';
@@ -258,7 +263,7 @@ $(document).ready(function(){
                   id="searchSuppName"
                 />
               </div>
-
+	
               <!-- 검색버튼 -->
               <div class="form-group col-sm-2 col-md-2 col-lg-2">
                 <button
@@ -270,7 +275,8 @@ $(document).ready(function(){
                   검색
                 </button>
               </div>
-
+              
+              <c:if test="${dept_auth.auth_supplier eq 2 || dept_auth.auth_supplier eq 3}">
               <!-- 공급처 등록 -->
               <div class="form-group col-sm-2 col-md-2 col-lg-2">
                 <button
@@ -282,13 +288,17 @@ $(document).ready(function(){
                   등록
                 </button>
               </div>
-
+              </c:if>
+              
+              <c:if test="${dept_auth.auth_supplier eq 3}">
               <!-- 공급처 삭제 -->
               <div class="form-group col-sm-2 col-md-2 col-lg-2">
                 <button type="button" class="btn btn-danger btn-block" id="deleteSuppBtn">
                   삭제
                 </button>
               </div>
+              </c:if>
+
             </div>
           </form>
         </div>
@@ -322,8 +332,15 @@ $(document).ready(function(){
               <td style="width: 8vw; text-align: center">담당자</td>
               <td style="width: 9vw; text-align: center">담당자 전화번호</td>
               <td style="width: 8vw; text-align: center">업종</td>
-              <td style="width: 15vw; text-align: center">메모</td>
-              <td style="width: 4.5vw; text-align: center">수정</td>
+      
+              <c:if test="${dept_auth.auth_supplier eq 3}">
+	              <td style="width: 15vw; text-align: center">메모</td>
+	              <td style="width: 4.5vw; text-align: center">수정</td>
+              </c:if>
+      
+              <c:if test="${dept_auth.auth_supplier ne 3}">
+	              <td style="width: 19vw; text-align: center" colspan="2">메모</td>
+              </c:if>
             </tr>
           </table>
         </div>
@@ -369,13 +386,25 @@ $(document).ready(function(){
 			              <td style="width: 8vw; text-align: center; line-height: 30px">
 			                ${supp.supp_type}
 			              </td>
-			              <td style="width: 15vw; text-align: center; line-height: 30px">
-			                ${supp.supp_note}
+			              
+			              <!--  권한이 3이면 출력 -->
+			              <c:if test="${dept_auth.auth_supplier eq 3}">
+				              <td style="width: 15vw; text-align: center; line-height: 30px">
+				                ${supp.supp_note}
+				              </td>
+				              <td style="width: 4.5vw; text-align: center; line-height: 30px">
+				                <button type="button" class="btn btn-info btn-block" id = "updateSuppBtn" 
+				                onclick="getSuppID('${supp.supp_id}')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button>
 			              </td>
-			              <td style="width: 4.5vw; text-align: center; line-height: 30px">
-			                <button type="button" class="btn btn-info btn-block" id = "updateSuppBtn" 
-			                onclick="getSuppID('${supp.supp_id}')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button>
-			              </td>
+			              </c:if>
+			              
+			              <!-- 권한이 3이 아니면 출력 -->
+   			              <c:if test="${dept_auth.auth_supplier ne 3}">
+				              <td style="width: 15vw; text-align: center; line-height: 30px" colspan ="2">
+				                ${supp.supp_note}
+				              </td>
+			              </c:if>
+			              
 			          	</tr>
 					</c:forEach>
           	</table>
@@ -654,7 +683,7 @@ function updateSupplier() {
 		          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
 		          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
 		          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
-		          				str += 'onclick="getSuppID('+data[i].supp_id+')" data-toggle="modal" data-target="#updateSuppModal">수정</button></td>';
+		          				str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal">수정</button></td>';
 	   					str += '</tr>';
 						}
 	  				str += '</table>';

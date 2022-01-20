@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.erp.dao.SupplierDAO;
+import com.erp.vo.Department;
 import com.erp.vo.Supplier;
 
 // user 공급처
@@ -59,6 +60,11 @@ public class SupplierServiceImpl implements SupplierService {
 	@Override
 	public void updateSupplier(Supplier supplier) throws Exception {
 		dao.updateSupplier(supplier);
+	}
+
+	@Override
+	public Department getAuth(String dept_num) throws Exception {
+		return dao.getAuth(dept_num);
 	}
 
 }

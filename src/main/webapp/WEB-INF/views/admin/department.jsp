@@ -238,6 +238,7 @@ $(document).ready(function() {
 						},
 						dataType : "JSON",
 						success : function(data) {
+							alert(dept_name + ' - 삭제완료');
 							$('#deptListTable').empty();
 							var str = '';
 							str += '<table style="width: 100%; height: auto; text-align: center; overflow: scroll-y;"class="table table-hover">';
@@ -318,7 +319,7 @@ $(document).ready(function() {
 			<div class="row">
 			
 			<!-- 테이블 항목(왼쪽) -->
-				<div class="form-group col-sm-6 col-md-6 col-lg-6" class="table-responsive"	style="width: 700px; height: 50vh; margin-left: 1%;">
+				<div class="form-group col-sm-6 col-md-6 col-lg-6" class="table-responsive"	style="height: 50vh; margin-left: 1%;">
 					
 					<div class="jumbotron" style="background-color: #f7fbfc; border: 2px solid #b9d7ea; height: 70vh;">
 					
@@ -392,9 +393,10 @@ $(document).ready(function() {
 
 
 				<!-- 등록, 수정 하는 화면(오른쪽) -->
-				<div class="form-group col-sm-6 col-md-6 col-lg-6" style="width: 20vw; height: 50vh;">
+				<div class="form-group col-sm-6 col-md-6 col-lg-6" style="width: 25vw; height: 50vh;">
 			
 					<div class="jumbotron" style="width: 100%; height: 70vh; background-color: #f7fbfc; border: 2px solid #b9d7ea">
+						
 						<div class="form-group col-sm-12 col-md-12 col-lg-12">
 							<div style = "width: 100%; height: 49px"></div>
 						</div>

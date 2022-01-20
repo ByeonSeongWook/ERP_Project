@@ -19,7 +19,48 @@
 <link rel="stylesheet" href="${path}/resources/css/bootstrap/custom.css" />
 <!-- 제이쿼리  -->
 <script src="${path}/resources/js/jquery.js"></script>
+<script>
+$(document).ready(function(){
+	
+	$('#submitBtn').hide();
+	
+	// 비밀 번호 확인창에 검증
+	$('#update_user_pw2').change(function(){
+		
+		$('#ex_txt').hide();
+		
+		var pw 	= $('#update_user_pw').val();
+		var pw2 	= $('#update_user_pw2').val();
+		
+		if(pw != pw2) {
+			$('#diff_pw').show();
+			$('#equal_pw').hide();
+			$('#submitBtn').hide();
+		}
+		else {
+			$('#diff_pw').hide();
+			$('#equal_pw').show();
+			$('#submitBtn').show();
+		}
+		
 
+		});
+	
+	$('form').submit(function(e){
+		
+		var pw 	= $('#update_user_pw').val();
+		var pw2 	= $('#update_user_pw2').val();
+		
+		if(pw == "" || pw2 == "") {
+		 	alert('변경할 비밀번호를 입력 해주세요!');
+		 	e.preventDefault();
+		 	return;
+		}
+		
+	});
+	
+});
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -41,30 +82,31 @@
 			<div class="container">
 				<div class="col-lg-6">
 					<div class="jumbotron" style="background-color: #f7fbfc; border: 2px solid #b9d7ea;">
-						<form method="POST" action="./user_mypage">
-							<h3
-								style="text-align: center; font-size: 30px; font-weight: 600; padding-bottom: 5%;">
+					
+					
+						<form method="POST" action="./update_userInfo">
+							<h3 style="text-align: center; font-size: 30px; font-weight: 600; padding-bottom: 5%;">
 								개인정보 수정</h3>
 
 							<!-- 사원번호 입력 -->
 							<div class="row">
 								<div class="form-group col-sm-4 col-md-4 col-lg-4">
-									<input type="text" name="user_id" class="form-control"
-										placeholder="사원번호" readonly />
+									<input type="text" name="user_num" class="form-control"
+										placeholder="사원번호" readonly value="${user.user_num}"/>
 								</div>
 
 								<!-- 부서번호 -->
 
 								<div class="form-group col-sm-4 col-md-4 col-lg-4">
 									<input type="text" class="form-control" id="dept_num"
-										name="dept_num" placeholder="부서코드" readonly />
+										name="dept_num" placeholder="부서코드" readonly value="${user.dept_num}"/>
 								</div>
 
 								<!-- 부서명 -->
 
 								<div class="form-group col-sm-4 col-md-4 col-lg-4">
 									<input type="text" class="form-control" id="dept_name"
-										name="dept_name" placeholder="부서명" readonly />
+										name="dept_name" placeholder="부서명" readonly value="${dept_name}"/>
 								</div>
 							</div>
 
@@ -72,7 +114,7 @@
 							<div class="row">
 								<div class="form-group cols-sm12 col-md-12 col-lg-12">
 									<input type="text" class="form-control" name="user_name"
-										placeholder="이름" />
+										placeholder="이름" value="${user.user_name}"/>
 								</div>
 							</div>
 
@@ -80,15 +122,7 @@
 							<div class="row">
 								<div class="form-group cols-sm12 col-md-12 col-lg-12">
 									<input type="text" class="form-control" name="user_tel"
-										placeholder="전화번호" />
-								</div>
-							</div>
-
-							<!-- 현재 비밀번호 입력 -->
-							<div class="row">
-								<div class="form-group col-sm-12 col-md-12 col-lg-12">
-									<input type="password" class="form-control" id="user_pw"
-										name="user_pw" placeholder="현재 비밀번호" />
+										placeholder="전화번호" value="${user.user_tel}"/>
 								</div>
 							</div>
 
@@ -96,7 +130,7 @@
 							<div class="row">
 								<div class="form-group col-sm-12 col-md-12 col-lg-12">
 									<input type="password" class="form-control" id="update_user_pw"
-										name="update_user_pw" placeholder="변경 할 비밀번호" />
+										name="user_pw" placeholder="변경 할 비밀번호"/>
 								</div>
 							</div>
 
@@ -104,8 +138,7 @@
 							<div class="row">
 								<div class="form-group col-sm-12 col-md-12 col-lg-12">
 									<input type="password" class="form-control"
-										id="update_user_pw2" name="update_user_pw2"
-										placeholder="변경 할 비밀번호 확인" />
+										id="update_user_pw2" placeholder="변경 할 비밀번호 확인" />
 								</div>
 							</div>
 
@@ -116,6 +149,8 @@
 										변경 할 비밀번호가 서로 다릅니다.</h6>
 									<h6 id="equal_pw" class="text-success" style="display: none">
 										확인되었습니다.</h6>
+									<h6 id="ex_txt" class="text-info">
+										비밀번호 입력시 수정 	버튼 활성화</h6>
 								</div>
 							</div>
 
@@ -123,45 +158,25 @@
 							<div class="row">
 								<div class="form-group cols-sm12 col-md-12 col-lg-12">
 									<input type="email" class="form-control" name="user_email"
-										placeholder="이메일" />
+										placeholder="이메일" value="${user.user_email}"/>
 								</div>
 							</div>
 
-							<!-- 주소 입력 -->
+							<!-- 주소 -->
 							<div class="row">
-								<!-- 우편번호 -->
-								<div class="form-group col-sm-6 col-md-6 col-lg-6">
-									<input type="text" class="form-control" id="addr1" name="addr1"
-										placeholder="우편번호" readonly />
-								</div>
-
-								<div class="form-group col-sm-6 col-md-6 col-lg-6">
-									<button type="button" class="btn btn-info btn-block"
-										style="background-color: #b9d7ea; border: 1px solid #b9d7ea;"
-										data-toggle="modal"
-										;
-                      data-target="#addrModal">
-										주소검색</button>
-								</div>
-
-								<!-- 주소 -->
 								<div class="form-group cols-sm12 col-md-12 col-lg-12">
-									<input type="text" class="form-control" id="addr2" name="addr2"
-										placeholder="주소" readonly />
-								</div>
-
-								<!-- 상세 주소 -->
-								<div class="form-group cols-sm12 col-md-12 col-lg-12">
-									<input type="text" class="form-control" id="addr3" name="addr3"
-										placeholder="상세 주소" />
+									<input type="text" class="form-control" id="user_addr" name="user_addr"
+										placeholder="주소" value="${user.user_addr}"/>
 								</div>
 							</div>
-
+							
 							<!-- 제출 버튼 -->
-							<div class="form-group">
-								<input type="submit" class="btn btn-info form-control"
-									value="정보변경" />
+							<div class="row">
+								<div class="form-group cols-sm12 col-md-12 col-lg-12">
+									<input type="submit" class="btn btn-control btn-info form-control" id="submitBtn" value="정보 수정">
+								</div>
 							</div>
+
 						</form>
 					</div>
 				</div>

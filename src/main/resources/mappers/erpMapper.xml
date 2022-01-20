@@ -239,4 +239,46 @@
 			ORDER BY acc_occdate DESC, acc_payment DESC
 		</select>
 		
+		<!-- 마이페이지 접속시 비밀번호 확인 -->
+		<select id ="pw_check" resultType="Users">
+			SELECT *
+			FROM USERS
+			WHERE user_num 	= #{user_num} 
+			AND user_pw 		= SHA2(#{user_pw},256)
+		</select>
+		
+		<!-- 마이페이지에 개인정보 불러오기 -->
+		<select id ="getUserInfo" resultType="Users">
+			SELECT *
+			FROM USERS
+			WHERE user_num 	= #{user_num} 
+		</select>
+		
+		
+		<!-- 마이페이지에 부서 이름 불러오기 -->
+		<select id ="getDeptName" resultType="String">
+			SELECT 	dept_name
+			FROM 		DEPARTMENT
+			WHERE 	dept_num = #{dept_num}
+		</select>
+		
+		<!-- 마이페이지 업데이트 문 -->
+		<update id="update_userInfo">
+			UPDATE USERS SET 
+				user_pw 			= SHA2(#{user_pw}, 256),
+				user_name 	= #{user_name},
+				user_tel	 		= #{user_tel},
+			    user_email 		= #{user_email},
+			    user_addr 		= #{user_addr}
+		    WHERE user_num = #{user_num}
+		</update>
+		
+		<!-- 권한목록 받아와서 페이지 설정 -->
+		<select id = "getAuth" resultType = "Department">
+			SELECT *
+			FROM DEPARTMENT
+			WHERE dept_num = #{dept_num}
+		</select>
+		 
+		
 </mapper>

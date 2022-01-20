@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${path}/resources/css/reset.css" />
 <!-- 네비 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/erpNav.css" />
+<link rel="stylesheet" href="${path}/resources/css/admin_main.css" />
 <!-- 부트스트랩 CSS -->
 <link rel="stylesheet"
 	href="${path}/resources/css/bootstrap/bootstrap.css" />
@@ -35,7 +36,22 @@
     
    	<!-- contents 부분 -->
 	<div id="contents" style="float: right; width: 88%; height: 100%;">
-	
+		<div class="page_btn">
+	        <div class="box_btn" OnClick="location.href ='employee'"><img src="${path}/resources/images/usermanagement.png" alt=""></div>
+	        <span>사원관리</span>
+	    </div>
+	    <div class="page_btn">
+	        <div class="box_btn" OnClick="location.href ='add_employee'"><img src="${path}/resources/images/adduser.png" alt=""></div>
+	        <span>사원등록</span>
+	    </div>
+	    <div class="page_btn">
+	         <div class="box_btn" OnClick="location.href ='department'"><img src="${path}/resources/images/departmentmnt.png" alt=""></div>
+	         <span>부서관리</span>
+	     </div>
+	     <div class="page_btn">
+	         <div class="box_btn" OnClick="location.href ='correct_auth'"><img src="${path}/resources/images/departmentright.png" alt=""></div>
+	         <span>부서권한관리</span>
+	     </div>
 	</div>
 </div>
 </body>

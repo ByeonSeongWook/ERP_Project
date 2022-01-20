@@ -38,7 +38,7 @@
           	</c:if>
        		
           	<c:if test="${users.user_num ne 'admin'}">
-          		<a class="mypage_btn" href="myPage">마이페이지</a>
+          		<a class="mypage_btn" href="pw_check">마이페이지</a>
           	</c:if>
 
           	
@@ -63,13 +63,18 @@
   </body>
       <script>
       $(document).ready(function () {
-      	var url = window.location.pathname;
-      	if(url == '/user/product') $('#productNavItem').addClass('on');
-      	else if(url == '/user/salesList') $('#salesListNavItem').addClass('on');
-      	else if(url == '/user/supplier') $('#supplierNavItem').addClass('on');
-      	else if(url == '/user/clients') $('#clientsNavItem').addClass('on');
-      	else if(url == '/user/orders') $('#ordersNavItem').addClass('on');
-      	else if(url == '/user/accounting') $('#accountingNavItem').addClass('on');
+    	  	/*** 네비게이션 add class ***/
+	      	var url = window.location.pathname;
+	      	if(url == '/user/product') $('#productNavItem').addClass('on');
+	      	else if(url == '/user/salesList') $('#salesListNavItem').addClass('on');
+	      	else if(url == '/user/supplier') $('#supplierNavItem').addClass('on');
+	      	else if(url == '/user/clients') $('#clientsNavItem').addClass('on');
+	      	else if(url == '/user/orders') $('#ordersNavItem').addClass('on');
+	      	else if(url == '/user/accounting') $('#accountingNavItem').addClass('on');
+		  	
+		    /*** controller 에서 메시지 보내기 ***/
+			var msg = '${msg}';
+			if(msg != null && msg != '') alert(msg);
       });
       </script>
 </html>

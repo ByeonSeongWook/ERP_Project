@@ -31,7 +31,10 @@ public class MainController {
 	
 	// 시작 화면(로그인)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, HttpSession session) {
+		
+		session.invalidate();
+		
 		return "login";
 	}
 
