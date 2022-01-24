@@ -18,6 +18,7 @@
 		<select id = "getDeptList" resultType = "Department">
 				SELECT *
 				FROM DEPARTMENT
+				WHERE dept_num NOT LIKE 'admin'
 		</select>
 		
 		
@@ -48,6 +49,13 @@
 		 		VALUES(#{user_num}, SHA2(#{user_pw},256), #{user_name}, #{dept_num}, #{user_tel}, #{user_email}, #{user_addr} )
 		</insert>
 		
+		<!-- 사원삭제  -->
+		<delete id = "deleteEmp">
+				DELETE 
+				FROM USERS
+				WHERE user_num = #{user_num}
+		</delete>
+		
 		<!-- 유저 이름 검색 -->
 		<select id = "searchName" resultType = "Users">
 				SELECT *
@@ -55,6 +63,24 @@
 				WHERE user_name LIKE #{user_name}
 				AND user_num NOT LIKE 'admin'
 		</select>
+		
+		<!-- 사원 번호로 유저 불러오기(수정시 사용) -->
+		<select id ="getEmployee" resultType = "Users">
+			SELECT *
+			FROM USERS
+			WHERE user_num = #{user_num}
+		</select>
+		
+		<!-- 사원 정보 수정 -->
+		<update id = "updateEmp">
+			UPDATE USERS
+			SET 
+				user_name	= #{user_name},
+				user_tel		= #{user_tel},
+				user_email	= #{user_email},
+				user_addr	= #{user_addr}
+			WHERE user_num = #{user_num}
+		</update>
 		
 		<!-- 부서 추가 -->
 		<insert id = "addDept">

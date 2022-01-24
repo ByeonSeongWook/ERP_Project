@@ -28,6 +28,15 @@ public interface AdminDAO {
 	// 사원 등록
 	public void join(Users users) throws Exception;
 	
+	// 사원 삭제
+	public void deleteEmp(String user_num) throws Exception;
+	
+	// 사원 정보 불러오기(수정)
+	public Users getEmployee(String user_num) throws Exception;
+	
+	// 사원 수정
+	public void updateEmp(Users users) throws Exception;
+	
 	// 부서 추가
 	public void addDept(Department department) throws Exception;
 	

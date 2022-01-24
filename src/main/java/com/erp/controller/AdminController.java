@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,7 +34,11 @@ public class AdminController {
 		
 		Users user = (Users) session.getAttribute("users");
 		
-		if(!user.getUser_num().equals("admin")) {
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		else if(!user.getUser_num().equals("admin")) {
 			ra.addFlashAttribute("msg", "잘못된 접근입니다!");
 			return "redirect:/";
 		}
@@ -44,25 +49,27 @@ public class AdminController {
 	}
 	
 	
-	// add_employee(사원추가)
+	// add_employee(사원추가 페이지)
 	@RequestMapping(value ="/add_employee", method = RequestMethod.GET)
 	public String add_employee(Model model, HttpSession session, RedirectAttributes ra) throws Exception {
 		
 		Users user = (Users) session.getAttribute("users");
 		
-		if(!user.getUser_num().equals("admin")) {
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		else if(!user.getUser_num().equals("admin")) {
 			ra.addFlashAttribute("msg", "잘못된 접근입니다!");
 			return "redirect:/";
 		}
 		else {
-			
 			List<Department> dept_list = service.getDeptList();
 			model.addAttribute("dept_list", dept_list);
 			
 			return "admin/add_employee";
 		}
 	}
-
 	
 	// department(부서 관리)
 	@RequestMapping(value ="/department", method = RequestMethod.GET)
@@ -70,12 +77,15 @@ public class AdminController {
 
 		Users user = (Users) session.getAttribute("users");
 		
-		if(!user.getUser_num().equals("admin")) {
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		else if(!user.getUser_num().equals("admin")) {
 			ra.addFlashAttribute("msg", "잘못된 접근입니다!");
 			return "redirect:/";
 		}
 		else {
-			
 			List<Department> dept_list = service.getDeptList();
 			model.addAttribute("dept_list", dept_list);
 			
@@ -90,12 +100,15 @@ public class AdminController {
 
 		Users user = (Users) session.getAttribute("users");
 		
-		if(!user.getUser_num().equals("admin")) {
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		else if(!user.getUser_num().equals("admin")) {
 			ra.addFlashAttribute("msg", "잘못된 접근입니다!");
 			return "redirect:/";
 		}
 		else {
-			
 			List<Department> dept_list = service.getDeptList();
 			model.addAttribute("dept_list", dept_list);
 			
@@ -128,19 +141,21 @@ public class AdminController {
 
 		Users user = (Users) session.getAttribute("users");
 		
-		if(!user.getUser_num().equals("admin")) {
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		else if(!user.getUser_num().equals("admin")) {
 			ra.addFlashAttribute("msg", "잘못된 접근입니다!");
 			return "redirect:/";
 		}
 		else {
-			
 			List<Users> user_list = service.getUsersList();
 			model.addAttribute("user_list", user_list);
 			
 			return "admin/employee";
 		}
 	}
-
 	
 	// searchName(사원검색)
 	@RequestMapping(value ="/searchName", method = RequestMethod.GET)
@@ -151,8 +166,19 @@ public class AdminController {
 		return service.searchName(user_name);
 	}
 	
-
-	// url -- joinAction 일 경우(사원추가)
+	// 사원 삭제
+	@RequestMapping(value="/deleteEmp", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Users> deleteEmp(@RequestParam(value="user_num[]") List<String> user_num) throws Exception {
+		
+		service.deleteEmpAction(user_num);
+		
+		return service.getUsersList();
+	}
+	
+	
+	
+	// 사원추가
 	@RequestMapping(value = "/joinAction", method = RequestMethod.POST)
 	public String joinAction(Users users, String addr1, String addr2, String addr3, RedirectAttributes ra) throws Exception {
 		
@@ -165,6 +191,28 @@ public class AdminController {
 		return "redirect:/admin/employee";
 	}
 
+
+	// 사원 정보 불러오기(수정할때 사용)	
+	@RequestMapping(value="/getEmployee", method = RequestMethod.POST)
+	@ResponseBody
+	public Users getEmployee(String user_num) throws Exception {
+		
+		return service.getEmployeeAction(user_num);
+	}
+
+	// 불러온 사원 정보로 수정하기
+	@RequestMapping(value="/updateEmp", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Users> updateEmp(Users users) throws Exception {
+		
+		System.out.println(users.getUser_name());
+		System.out.println(users.getUser_num());
+		
+		service.updateEmp(users);
+		
+		return service.getUsersList();
+	}
+	
 	
 	// department
 	@RequestMapping(value = "/getDepartment", method = RequestMethod.POST)

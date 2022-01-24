@@ -84,7 +84,6 @@ $(document).ready(function(){
 	// 공급처 검색 ajax 종료
 	
 	
-	
 	//공급처 등록 ajax
 	$('#addSuppAction').click(function(){
 		var supp_id		= $('#supp_id').val();
@@ -96,70 +95,80 @@ $(document).ready(function(){
 		var supp_type	= $('#supp_type').val();
 		var supp_note	= $('#supp_note').val();
 		
-		$.ajax({
-			
-			type: 'POST',
-			url: './addSupplierAction',
-			data: {
-			 	supp_id		: supp_id,
-			 	supp_name	: supp_name,
-				supp_addr	: supp_addr,
-				supp_tel		: supp_tel,
-				user_num	: user_num,
-				user_tel		: user_tel,
-				supp_type	: supp_type,
-				supp_note	: supp_note
-			},
-			dataType: 'JSON',
-			
-			success : function(data) {
-				$('#addSuppModal').modal('hide');
-				alert('공급처 추가 완료');
+		
+		// 빈칸이 없는지 검증
+		if(supp_id == '' || supp_name == '' || supp_addr == '' || supp_tel == '' 
+				|| user_num == '' || user_tel == '' || supp_type == '') {
+		 	alert('모든 값을 입력해주세요!!');
+		 	e.preventDefault();
+		 	return;
+		}
+		else {
+			$.ajax({
 				
-				// 완료 후 input 값 빈칸으로 만들기
-				$('#supp_id').val('');
-				$('#supp_name').val('');
-			 	$('#supp_addr').val('');
-				$('#supp_tel').val('');
-				$('#user_num').val('');
-				$('#user_tel').val('');
-				$('#supp_type').val('');
-				$('#supp_note').val('비고');
+				type: 'POST',
+				url: './addSupplierAction',
+				data: {
+				 	supp_id		: supp_id,
+				 	supp_name	: supp_name,
+					supp_addr	: supp_addr,
+					supp_tel		: supp_tel,
+					user_num	: user_num,
+					user_tel		: user_tel,
+					supp_type	: supp_type,
+					supp_note	: supp_note
+				},
+				dataType: 'JSON',
 				
+				success : function(data) {
+					$('#addSuppModal').modal('hide');
+					alert('공급처 추가 완료');
+					
+					// 완료 후 input 값 빈칸으로 만들기
+					$('#supp_id').val('');
+					$('#supp_name').val('');
+				 	$('#supp_addr').val('');
+					$('#supp_tel').val('');
+					$('#user_num').val('');
+					$('#user_tel').val('');
+					$('#supp_type').val('');
+					$('#supp_note').val('비고');
+					
+					
+					$('#suppTableList').empty();
+					
+					var str = '';
+						str +='<table  style="width: 85vw; height: auto; text-align: center" class="table table-hover" id="suppTableList" >';
+			          			for(var i = 0; i < data.length; i++) {
+			          				str += '<tr>';
+				          				str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
+				          				str += '<label><input type="checkbox" value="'+data[i].supp_id+'"/></label></td>';
+				          				str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">'+data[i].supp_id+'</td>';
+				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_name+'</td>';
+				          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_addr+'</td>';
+				          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].supp_tel+'</td>';
+				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].user_num+'</td>';
+				          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].user_tel+'</td>';
+				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_type+'</td>';
+				          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
+				          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
+				          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
+				          				str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
+		          					str += '</tr>';
+									}
+		      				str += '</table>';
+						$('#suppTableList').append(str); 
+	
+				},
+				error : function(){
+					alert('중복된 공급처 ID는 등록할 수 없습니다!');
+					location.reload();
+	
+				}
 				
-				$('#suppTableList').empty();
-				
-				var str = '';
-					str +='<table  style="width: 85vw; height: auto; text-align: center" class="table table-hover" id="suppTableList" >';
-		          			for(var i = 0; i < data.length; i++) {
-		          				str += '<tr>';
-			          				str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
-			          				str += '<label><input type="checkbox" value="'+data[i].supp_id+'"/></label></td>';
-			          				str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">'+data[i].supp_id+'</td>';
-			          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_name+'</td>';
-			          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_addr+'</td>';
-			          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].supp_tel+'</td>';
-			          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].user_num+'</td>';
-			          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].user_tel+'</td>';
-			          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_type+'</td>';
-			          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
-			          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
-			          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
-			          				str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
-	          					str += '</tr>';
-								}
-	      				str += '</table>';
-					$('#suppTableList').append(str); 
-
-			},
-			error : function(){
-				alert('중복된 공급처 ID는 등록할 수 없습니다!');
-				location.reload();
-
-			}
-			
-		});
-		// 공급처 등록 ajax 종료
+			});
+			// 공급처 등록 ajax 종료
+		}
 	});
 	
 	
@@ -627,7 +636,6 @@ function getSuppID(supp_id) {
 			$('#supp_note_up').val(data.supp_note);
 		},
 		error: function(){
-			alert('수정 실패! 다시 시도 해주세요!');
 			location.reload();
 		}
 			

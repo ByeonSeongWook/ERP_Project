@@ -41,20 +41,36 @@ public class UsersController {
 	
 	// userMain(유저 메인)	
 	@RequestMapping(value ="/userMain", method = RequestMethod.GET)
-	public String main(Model model, HttpSession session) {
+	public String main(Model model, HttpSession session, RedirectAttributes ra) {
 		
 		Users user = (Users) session.getAttribute("users");
-		model.addAttribute("users", user);
 		
-		return "user/userMain";
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		
+		else {
+			model.addAttribute("users", user);
+			return "user/userMain";
+		}
 	}
 
 	// --- myPage
 	// myPage 들어 가기전에 비밀번호 확인
 	@RequestMapping(value="/pw_check", method = RequestMethod.GET)
-	public String pw_check() throws Exception {
+	public String pw_check(HttpSession session, RedirectAttributes ra) throws Exception {
 		
-		return "user/pw_check";
+		Users user = (Users) session.getAttribute("users");
+		
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		else {
+			return "user/pw_check";
+		}
+	
 	}
 	
 	
@@ -129,12 +145,21 @@ public class UsersController {
 	// --- product
 	// product(제품관리)
 	@RequestMapping(value="/product", method = RequestMethod.GET) 
-	public String product(Model model) throws Exception{
+	public String product(Model model, HttpSession session, RedirectAttributes ra) throws Exception{
 		
-		List<Product> product_List = pro_service.getProductList();
-		model.addAttribute("product_List",product_List);
+		Users user = (Users) session.getAttribute("users");
 		
-		return "user/product";
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		
+		else {
+			List<Product> product_List = pro_service.getProductList();
+			model.addAttribute("product_List",product_List);
+			
+			return "user/product";
+		}
 	}
 	
 	// 제품 이름을 받아와 검색
@@ -161,22 +186,52 @@ public class UsersController {
 	// --- clients
 	// clients(고객관리)
 	@RequestMapping(value ="/clients", method = RequestMethod.GET)
-	public String clients(Model model) {
-		return "user/clients";
+	public String clients(Model model, HttpSession session, RedirectAttributes ra) {
+		
+		Users user = (Users) session.getAttribute("users");
+		
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		
+		else {
+			return "user/clients";
+		}
 	}
 	
 	// --- orders
 	// orders(발주관리)
 	@RequestMapping(value ="/orders", method = RequestMethod.GET)
-	public String orders(Model model) {
-		return "user/orders";
+	public String orders(Model model, HttpSession session, RedirectAttributes ra) {
+		
+		Users user = (Users) session.getAttribute("users");
+		
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		
+		else {
+			return "user/orders";
+		}
 	}
 	
 	// --- salesList
 	// salesList(영업관리)
 	@RequestMapping(value ="/salesList", method = RequestMethod.GET)
-	public String salesList(Model model) {
-		return "user/salesList";
+	public String salesList(Model model, HttpSession session, RedirectAttributes ra) {
+		
+		Users user = (Users) session.getAttribute("users");
+		
+		if(user == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
+		
+		else {
+			return "user/salesList";
+		}
 	}
 	
 	// --- supplier
@@ -248,7 +303,7 @@ public class UsersController {
 	// 공급처 수정을 위해 데이터 받아오기(supp_id 기준)	
 	@RequestMapping(value="/getSearchSupplier", method = RequestMethod.POST)
 	@ResponseBody
-	public Supplier getSearchSupplier(Model model, String supp_id) throws Exception {
+	public Supplier getSearchSupplier(String supp_id) throws Exception {
 		
 		return supp_service.getSearchSupplier(supp_id);
 	}
@@ -269,16 +324,23 @@ public class UsersController {
 	// --- accounting
 	// accounting (회계)	
 	@RequestMapping(value ="/accounting", method = RequestMethod.GET)
-	public String accounting(Model model, HttpSession session) throws Exception {
+	public String accounting(Model model, HttpSession session, RedirectAttributes ra) throws Exception {
 		
 		Users sion = (Users) session.getAttribute("users");
 		
+		if(sion == null) {
+			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
+			return "redirect:/";
+		}
 		
-		List<Accounting> acc_list = acc_service.getAccList();
-		model.addAttribute("acc_list", acc_list);
-		model.addAttribute("users", sion);
+		else {
 		
-		return "user/accounting";
+			List<Accounting> acc_list = acc_service.getAccList();
+			model.addAttribute("acc_list", acc_list);
+			model.addAttribute("users", sion);
+			
+			return "user/accounting";
+		}
 	}
 	
 	// 회계 데이터 등록	

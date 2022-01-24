@@ -59,7 +59,23 @@ public class AdminServiceImpl implements AdminService {
 	public void joinAction(Users users) throws Exception {
 		dao.join(users);
 	}
+
+	@Override
+	public void deleteEmpAction(List<String> user_num) throws Exception {
+		for(String item: user_num)
+			dao.deleteEmp(item);
+	}
 	
+	@Override
+	public Users getEmployeeAction(String user_num) throws Exception {
+		return dao.getEmployee(user_num);
+	}
+	
+	@Override
+	public void updateEmp(Users users) throws Exception {
+		dao.updateEmp(users);
+	}
+
 	@Override
 	public void addDeptAction(Department department) throws Exception {
 		dao.addDept(department);
@@ -93,6 +109,8 @@ public class AdminServiceImpl implements AdminService {
 		// 권한 수정 기능
 		dao.auth_update(department);
 	}
+
+
 
 
 	

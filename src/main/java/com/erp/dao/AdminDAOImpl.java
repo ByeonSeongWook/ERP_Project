@@ -60,6 +60,21 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
+	public void deleteEmp(String user_num) throws Exception {
+		sqlSession.delete(SESSION + ".deleteEmp", user_num);
+	}
+	
+	@Override
+	public Users getEmployee(String user_num) throws Exception {
+		return sqlSession.selectOne(SESSION + ".getEmployee", user_num);
+	}
+	
+	@Override
+	public void updateEmp(Users users) throws Exception {
+		sqlSession.update(SESSION + ".updateEmp", users);
+	}
+	
+	@Override
 	public void addDept(Department department) throws Exception {
 		sqlSession.insert(SESSION + ".addDept", department);
 	}
@@ -88,7 +103,8 @@ public class AdminDAOImpl implements AdminDAO {
 	public void auth_update(Department department) throws Exception {
 		sqlSession.update(SESSION + ".auth_update", department);
 	}
-	
+
+
 
 
 }

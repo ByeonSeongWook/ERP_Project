@@ -20,6 +20,12 @@ public interface AdminService {
 	
 	public void joinAction(Users users) throws Exception;
 	
+	public void deleteEmpAction(List<String> user_num) throws Exception;
+	
+	public Users getEmployeeAction(String user_num) throws Exception;
+	
+	public void updateEmp(Users users) throws Exception;
+	
 	public void addDeptAction(Department department) throws Exception;
 	
 	public void UpdateDeptAction(Department department) throws Exception;
