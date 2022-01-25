@@ -326,9 +326,9 @@ public class UsersController {
 	@RequestMapping(value ="/accounting", method = RequestMethod.GET)
 	public String accounting(Model model, HttpSession session, RedirectAttributes ra) throws Exception {
 		
-		Users sion = (Users) session.getAttribute("users");
+		Users user = (Users) session.getAttribute("users");
 		
-		if(sion == null) {
+		if(user == null) {
 			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
 			return "redirect:/";
 		}
@@ -337,7 +337,8 @@ public class UsersController {
 		
 			List<Accounting> acc_list = acc_service.getAccList();
 			model.addAttribute("acc_list", acc_list);
-			model.addAttribute("users", sion);
+			model.addAttribute("users", user);
+			model.addAttribute("dept_auth", supp_service.getAuth(user.getDept_num()));
 			
 			return "user/accounting";
 		}
@@ -348,15 +349,16 @@ public class UsersController {
 	@ResponseBody
 	public List<Accounting> addAccAction(Accounting accounting, HttpSession session, Model model) throws Exception {
 		
-		Users sion = (Users) session.getAttribute("users");
+		Users user = (Users) session.getAttribute("users");
 		
-		accounting.setAcc_writer(sion.getUser_name());
+		accounting.setAcc_writer(user.getUser_name());
 		
 		acc_service.addAccAction(accounting);
 		
 		return acc_service.getAccList();
 	}
 	
+	// 검색(회계단위)
 	@RequestMapping(value="/searchAccPayMent", method  = RequestMethod.POST)
 	@ResponseBody
 	public List<Accounting> searchAccPayMent(String acc_payment) throws Exception {
@@ -364,6 +366,7 @@ public class UsersController {
 		return acc_service.searchAccPayMent(acc_payment);
 	}
 	
+	// 검색(작성자)
 	@RequestMapping(value="/searchAccWriter", method  = RequestMethod.POST)
 	@ResponseBody
 	public List<Accounting> searchAccWriter(String acc_writer) throws Exception {
@@ -371,6 +374,7 @@ public class UsersController {
 		return acc_service.searchAccWriter(acc_writer);
 	}
 	
+	// 검색(작성일)
 	@RequestMapping(value="/searchAccDate", method  = RequestMethod.POST)
 	@ResponseBody
 	public List<Accounting> searchAccDate(String acc_occdate) throws Exception {

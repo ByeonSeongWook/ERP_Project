@@ -204,10 +204,7 @@ public class AdminController {
 	@RequestMapping(value="/updateEmp", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Users> updateEmp(Users users) throws Exception {
-		
-		System.out.println(users.getUser_name());
-		System.out.println(users.getUser_num());
-		
+
 		service.updateEmp(users);
 		
 		return service.getUsersList();

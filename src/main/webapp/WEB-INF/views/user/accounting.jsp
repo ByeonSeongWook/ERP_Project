@@ -121,7 +121,6 @@
 	       		} ,
 	       		dataType : 'JSON',
 	       		success : function(data) {
-	       			alert(acc_occdate);
 		 			var str = '';
 		 			$('#acc_list').empty();
 		 			
@@ -242,7 +241,7 @@
 					</div>
 				
 					<!-- 입력 테이블 -->
-					<c:if test="${dept_auth.auth_supplier eq 3}">
+					<c:if test="${dept_auth.auth_accounting eq 3}">
 					<div class="add_table"
 						style="width: 86vw; height: 6.3vh; margin-left: 1vw; margin-top: 5vh; text-align: center; border: 2px solid #769fcd; border-bottom: none;">
 						<!-- 제목 -->
@@ -265,7 +264,7 @@
 								<input onkeydown="if (event.keyCode == 13) acc_amount.focus();" type="text" id="acc_occdate" placeholder ="형식 : yyyy-mm-dd"/>
 							</div>
 							<div style="width: 14%; text-align: center;">
-								<input onkeydown="if (event.keyCode == 13) acc_location.focus();" type="text" id="acc_amount"/>
+								<input onkeydown="if (event.keyCode == 13) acc_location.focus();" type="text" id="acc_amount" placeholder = "숫자만 입력해주세요!"/>
 							</div>
 							<div style="width: 10%; text-align: center;">
 								<input onkeydown="if (event.keyCode == 13) acc_note.focus();" type="text" id="acc_location"/>
@@ -289,6 +288,13 @@
 					 			var acc_location		= $('#acc_location').val();
 					 			var acc_note 			= $('#acc_note').val();
 					 			
+					 			if(acc_payment == '' || acc_ctg == '' || acc_occdate == '' ||
+					 					acc_amount == '' || acc_location == '' ) {
+					 				alert('모든값을 입력해주세요!!');
+					 				e.preventDefault();
+				 					return;
+					 			}
+					 			else {
 					 			$.ajax({
 					 				url: "./addAccAction",
 					 				type: 'POST',
@@ -331,12 +337,14 @@
 						 				$('#acc_list').append(str);
 					 				},
 					 				error:function(){
-					 					alert('error');
-					 					location.reload();
+					 					alert('입력값들이 양식에 맞는지 다시 확인해주세요!!');
+					 					e.preventDefault();
+					 					return;
 					 				}
 					 			});
 					            
-					        }
+					        } // ajax
+					    } // else
 					}
 				</script>
 				
