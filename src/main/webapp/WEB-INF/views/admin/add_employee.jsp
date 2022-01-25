@@ -56,12 +56,30 @@ $(document).ready(function(){
 				}
 			})
 		});
+
+	
+	$('form').submit(function(e){
+		var user_num 	= $('#user_num').val();
+		var user_name 	= $('#user_name').val();
+		var user_tel 		= $('#user_tel').val();
+		var user_email 	= $('#user_email').val();
+		var addr1 			= $('#addr1').val();
+		var addr2 			= $('#addr2').val();
+		var addr3 			= $('#addr3').val();
+		
+		if (user_num == '' || user_name == '' || user_tel == '' || user_email == '' || 
+				addr1 == '' || addr2 == '' || addr3 == '') {
+			alert('모든값을 입력해주세요!');
+			e.preventDefault();
+			return;
+		}
+			
+	});
+	
 	});
 	
 </script>
-<script>
 
-</script>
 </head>
 <body>
 <div id="wrap">
@@ -126,7 +144,7 @@ $(document).ready(function(){
 						<!-- 이름 입력 -->
 						<div class="row">
 							<div class="form-group cols-sm12 col-md-12 col-lg-12">
-								<input type="text" class="form-control" name="user_name"
+								<input type="text" class="form-control" name="user_name" id = "user_name"
 									placeholder="이름">
 							</div>
 						</div>
@@ -134,7 +152,7 @@ $(document).ready(function(){
 						<!-- 전화번호 입력 -->
 						<div class="row">
 							<div class="form-group cols-sm12 col-md-12 col-lg-12">
-								<input type="text" class="form-control" name="user_tel"
+								<input type="text" class="form-control" name="user_tel" id = "user_tel"
 									placeholder="전화번호">
 							</div>
 						</div>
@@ -142,7 +160,7 @@ $(document).ready(function(){
 						<!-- 이메일 입력 -->
 						<div class="row">
 							<div class="form-group cols-sm12 col-md-12 col-lg-12">
-								<input type="email" class="form-control" name="user_email"
+								<input type="email" class="form-control" name="user_email" id = "user_email"
 									placeholder="이메일">
 							</div>
 						</div>

@@ -14,8 +14,6 @@ public interface SupplierService {
 	
 	public void addSupplierAction(Supplier supplier) throws Exception;
 	
-	public String searchSupplier_id(String supp_id) throws Exception;
-	
 	public void deleteSupplier(List<String> supp_id) throws Exception;
 	
 	public Supplier getSearchSupplier(String supp_id) throws Exception;

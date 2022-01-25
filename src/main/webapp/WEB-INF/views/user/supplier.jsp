@@ -50,29 +50,38 @@ $(document).ready(function(){
 					$('#suppTableList').empty();
 					var str = '';
 						str +='<table  style="width: 85vw; height: auto; text-align: center" class="table table-hover" id="suppTableList" >';
-			          			for(var i = 0; i < data.length; i++) {
-			          				str += '<tr>';
-				          				str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
-				          				str += '<label><input type="checkbox" value="'+data[i].supp_id+'"/></label></td>';
-				          				str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">'+data[i].supp_id+'</td>';
-				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_name+'</td>';
-				          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_addr+'</td>';
-				          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].supp_tel+'</td>';
-				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].user_num+'</td>';
-				          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].user_tel+'</td>';
-				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_type+'</td>';
-							              
-				          				str += '<c:if test="${dept_auth.auth_supplier eq 3}">';
-							          	str +=  '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
-								        	str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
-								        	str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"'; 
-								        	str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button>';
-								        	str += '</td></c:if>';
-								        	
-								        	str += '<c:if test="${dept_auth.auth_supplier ne 3}">';     
-								        	str += '<td style="width: 15vw; text-align: center; line-height: 30px" colspan ="2">'+data[i].supp_note+'</td></c:if>';
-								        	str += '</tr>';
-									}
+	          			for(var i = 0; i < data.length; i++) {
+          					
+        					str += '<tr>';
+	        					str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
+	        					str += '<label><input type="checkbox" name="table_supp_id" value="'+data[i].supp_id+'" /></label></td>';
+	        					str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_id+'</td>';
+	        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_name+'</td>';
+	        					str += '<td style="width: 15vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_addr+'</td>';
+	        					str += '<td style="width: 9vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_tel+'</td>';
+	        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+	        					str += data[i].user_num+'</td>';
+	        					str += '<td style="width: 9vw; text-align: center; line-height: 30px">';
+	        					str += data[i].user_tel+'</td>';
+	        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_type+'</td>';
+			  			              
+	        					str += '<c:if test="${dept_auth.auth_supplier eq 3}">';
+	        					str += '<td style="width: 15vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_note+'</td>';
+	        					str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
+	        					str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"'; 
+        						str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td></c:if>';
+        						str += '<c:if test="${dept_auth.auth_supplier ne 3}">';
+        						str += '<td style="width: 15vw; text-align: center; line-height: 30px" colspan ="2">';
+        						str += data[i].supp_note+'</td></c:if>';
+	  			              
+    						str += '</tr>';
+							}
 		      				str += '</table>';
 						$('#suppTableList').append(str); 
 						
@@ -139,23 +148,38 @@ $(document).ready(function(){
 					
 					var str = '';
 						str +='<table  style="width: 85vw; height: auto; text-align: center" class="table table-hover" id="suppTableList" >';
-			          			for(var i = 0; i < data.length; i++) {
-			          				str += '<tr>';
-				          				str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
-				          				str += '<label><input type="checkbox" value="'+data[i].supp_id+'"/></label></td>';
-				          				str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">'+data[i].supp_id+'</td>';
-				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_name+'</td>';
-				          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_addr+'</td>';
-				          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].supp_tel+'</td>';
-				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].user_num+'</td>';
-				          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].user_tel+'</td>';
-				          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_type+'</td>';
-				          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
-				          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
-				          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
-				          				str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
-		          					str += '</tr>';
-									}
+	          			for(var i = 0; i < data.length; i++) {
+          					
+        					str += '<tr>';
+	        					str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
+	        					str += '<label><input type="checkbox" name="table_supp_id" value="'+data[i].supp_id+'" /></label></td>';
+	        					str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_id+'</td>';
+	        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_name+'</td>';
+	        					str += '<td style="width: 15vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_addr+'</td>';
+	        					str += '<td style="width: 9vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_tel+'</td>';
+	        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+	        					str += data[i].user_num+'</td>';
+	        					str += '<td style="width: 9vw; text-align: center; line-height: 30px">';
+	        					str += data[i].user_tel+'</td>';
+	        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_type+'</td>';
+			  			              
+	        					str += '<c:if test="${dept_auth.auth_supplier eq 3}">';
+	        					str += '<td style="width: 15vw; text-align: center; line-height: 30px">';
+	        					str += data[i].supp_note+'</td>';
+	        					str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
+	        					str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"'; 
+        						str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td></c:if>';
+        						str += '<c:if test="${dept_auth.auth_supplier ne 3}">';
+        						str += '<td style="width: 15vw; text-align: center; line-height: 30px" colspan ="2">';
+        						str += data[i].supp_note+'</td></c:if>';
+	  			              
+    						str += '</tr>';
+							}
 		      				str += '</table>';
 						$('#suppTableList').append(str); 
 	
@@ -205,28 +229,44 @@ $(document).ready(function(){
 					$('#suppTableList').empty();
 					var str = '';
 					str +='<table  style="width: 85vw; height: auto; text-align: center" class="table table-hover" id="suppTableList" >';
-	          			for(var i = 0; i < data.length; i++) {
-	          				str += '<tr>';
-		          				str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
-		          				str += '<label><input type="checkbox" value="'+data[i].supp_id+'"/></label></td>';
-		          				str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">'+data[i].supp_id+'</td>';
-		          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_name+'</td>';
-		          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_addr+'</td>';
-		          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].supp_tel+'</td>';
-		          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].user_num+'</td>';
-		          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].user_tel+'</td>';
-		          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_type+'</td>';
-		          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
-		          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
-		          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
-		          				str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td>';
-	      					str += '</tr>';
-							}
+          			for(var i = 0; i < data.length; i++) {
+      					
+    					str += '<tr>';
+        					str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
+        					str += '<label><input type="checkbox" name="table_supp_id" value="'+data[i].supp_id+'" /></label></td>';
+        					str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">';
+        					str += data[i].supp_id+'</td>';
+        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+        					str += data[i].supp_name+'</td>';
+        					str += '<td style="width: 15vw; text-align: center; line-height: 30px">';
+        					str += data[i].supp_addr+'</td>';
+        					str += '<td style="width: 9vw; text-align: center; line-height: 30px">';
+        					str += data[i].supp_tel+'</td>';
+        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+        					str += data[i].user_num+'</td>';
+        					str += '<td style="width: 9vw; text-align: center; line-height: 30px">';
+        					str += data[i].user_tel+'</td>';
+        					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+        					str += data[i].supp_type+'</td>';
+		  			              
+        					str += '<c:if test="${dept_auth.auth_supplier eq 3}">';
+        					str += '<td style="width: 15vw; text-align: center; line-height: 30px">';
+        					str += data[i].supp_note+'</td>';
+        					str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
+        					str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"'; 
+    						str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td></c:if>';
+    						str += '<c:if test="${dept_auth.auth_supplier ne 3}">';
+    						str += '<td style="width: 15vw; text-align: center; line-height: 30px" colspan ="2">';
+    						str += data[i].supp_note+'</td></c:if>';
+  			              
+						str += '</tr>';
+						}
 		  				str += '</table>';
 					$('#suppTableList').append(str); 
 					
 				},
 				error: function(){
+					alert('error!');
 					location.reload();
 				}
 			
@@ -677,23 +717,38 @@ function updateSupplier() {
 				$('#suppTableList').empty();
 				var str = '';
 				str +='<table  style="width: 85vw; height: auto; text-align: center" class="table table-hover" id="suppTableList" >';
-	   				for(var i = 0; i < data.length; i++) {
-	       				str += '<tr>';
-		          				str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
-		          				str += '<label><input type="checkbox" value="'+data[i].supp_id+'"/></label></td>';
-		          				str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">'+data[i].supp_id+'</td>';
-		          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_name+'</td>';
-		          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_addr+'</td>';
-		          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].supp_tel+'</td>';
-		          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].user_num+'</td>';
-		          				str += '<td style="width: 9vw; text-align: center; line-height: 30px">'+data[i].user_tel+'</td>';
-		          				str += '<td style="width: 8vw; text-align: center; line-height: 30px">'+data[i].supp_type+'</td>';
-		          				str += '<td style="width: 15vw; text-align: center; line-height: 30px">'+data[i].supp_note+'</td>';
-		          				str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
-		          				str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"';
-		          				str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal">수정</button></td>';
-	   					str += '</tr>';
-						}
+      			for(var i = 0; i < data.length; i++) {
+  					
+					str += '<tr>';
+    					str += '<td style="width: 2vw; text-align: center; line-height: 30px">';
+    					str += '<label><input type="checkbox" name="table_supp_id" value="'+data[i].supp_id+'" /></label></td>';
+    					str += '<td style="width: 6.5vw; text-align: center; line-height: 30px">';
+    					str += data[i].supp_id+'</td>';
+    					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+    					str += data[i].supp_name+'</td>';
+    					str += '<td style="width: 15vw; text-align: center; line-height: 30px">';
+    					str += data[i].supp_addr+'</td>';
+    					str += '<td style="width: 9vw; text-align: center; line-height: 30px">';
+    					str += data[i].supp_tel+'</td>';
+    					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+    					str += data[i].user_num+'</td>';
+    					str += '<td style="width: 9vw; text-align: center; line-height: 30px">';
+    					str += data[i].user_tel+'</td>';
+    					str += '<td style="width: 8vw; text-align: center; line-height: 30px">';
+    					str += data[i].supp_type+'</td>';
+	  			              
+    					str += '<c:if test="${dept_auth.auth_supplier eq 3}">';
+    					str += '<td style="width: 15vw; text-align: center; line-height: 30px">';
+    					str += data[i].supp_note+'</td>';
+    					str += '<td style="width: 4.5vw; text-align: center; line-height: 30px">';
+    					str += '<button type="button" class="btn btn-info btn-block" id = "updateSuppBtn"'; 
+						str += 'onclick="getSuppID(\''+data[i].supp_id+'\')" data-toggle="modal" data-target="#updateSuppModal"> 수정</button></td></c:if>';
+						str += '<c:if test="${dept_auth.auth_supplier ne 3}">';
+						str += '<td style="width: 15vw; text-align: center; line-height: 30px" colspan ="2">';
+						str += data[i].supp_note+'</td></c:if>';
+			              
+					str += '</tr>';
+					}
 	  				str += '</table>';
 				$('#suppTableList').append(str); 
 				

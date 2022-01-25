@@ -35,11 +35,6 @@ public class SupplierDAOImpl implements SupplierDAO {
 	}
 
 	@Override
-	public String searchSupplier_id(String supp_id) throws Exception {
-		return sqlSession.selectOne(SESSION + ".searchSupplier_id", supp_id);
-	}
-
-	@Override
 	public void deleteSupplier(String supp_id) throws Exception {
 		sqlSession.delete(SESSION + ".deleteSupplier", supp_id);
 	}
