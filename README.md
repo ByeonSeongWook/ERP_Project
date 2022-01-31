@@ -2,7 +2,7 @@
 # ERP Team Project
 
 ---
-
+<br/>
 ## 1. 프로젝트 소개
 
 ![erp_p_main.png](project%20readme%204007a044a3a14961a54799f548aadfb4/erp_p_main.png)
@@ -10,7 +10,7 @@
 - 가상의 회사 Chang Duk 이라는 넥타이 판매를 하는 회사를 만들어서 그 회사의 구성원들이 회사 데이터 관리를 편하게 하기 위해서 전사적 자원 관리(ERP) 시스템 Project를 기획 했습니다.
 
 - 현재 관리자 페이지의 기능과 유저 - 공급처, 회계 부분만 기능을 만들어 두었습니다.
-
+<br/><br/>
 
 
 ## 2. 기능 소개
@@ -54,16 +54,12 @@
     - 처음 프로젝트 설계시 회계는 간단한 회계단위로만 나누어 놓고 등록만 가능하게 설계를 했습니다.
     - 회계 데이터 등록시 작성자는 세션에 등록된 User의 “이름(사원번호)” 로 등록되게 했습니다.
     - 검색 창은 자주 검색할  것 같은 회계단위, 작성자, 작성일 기준으로 3칸으로 나누어 놨습니다.
-
+<br/><br/>
 
 
 ## 3. 사용 기술
-
-- Spring
-- MySQL
-- JSP
-- Javascript
-
+<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/> <img src="https://img.shields.io/badge/jQuery-0769AD?style=flat-square&logo=jQuery&logoColor=white"/>
+<br/><br/>
 
 
 ## 4. 협업시 맡은 부분
@@ -73,7 +69,7 @@
     - [ssb4887](https://github.com/ssb4887) : 유저 제품 기능과 페이지
 - Front-end :
     - [eing98](https://github.com/eing98) : 프로젝트 디자인, 동적인 부분, 회계 페이지
-    
+<br/><br/>    
     
     
 
