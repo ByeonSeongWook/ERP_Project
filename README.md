@@ -5,7 +5,7 @@
 <br/>
 ## 1. 프로젝트 소개
 
-![erp_p_main.png](project%20readme%204007a044a3a14961a54799f548aadfb4/erp_p_main.png)
+![erp_p_main.png](project_main/erp_p_main.png)
 
 - 가상의 회사 Chang Duk 이라는 넥타이 판매를 하는 회사를 만들어서 그 회사의 구성원들이 회사 데이터 관리를 편하게 하기 위해서 전사적 자원 관리(ERP) 시스템 Project를 기획 했습니다.
 
