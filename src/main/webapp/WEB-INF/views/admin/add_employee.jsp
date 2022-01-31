@@ -297,7 +297,7 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-<%-- 주소 검색 모달 종료--%>
+<!-- 주소 검색 모달 종료-->
 
 </body>
 </html>

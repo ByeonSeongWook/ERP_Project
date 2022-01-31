@@ -81,14 +81,16 @@ public class UsersController {
 		Users user = (Users) session.getAttribute("users");
 		String user_num = user.getUser_num();
 		
-			// 세션 넣어두고
-			session.setAttribute("pw_check", user_num);
+		users.setUser_num(user_num);
 		
-			users.setUser_num(user_num);
+		mp_service.pw_check(users);
 			
 			if(mp_service.pw_check(users) != null) {
+				
 				ra.addFlashAttribute("msg", "인증에 성공했습니다!");
-				mp_service.pw_check(users);
+				// 마이페이지 접근시 url로 접근하는 것을 막아둠
+				session.setAttribute("pw_check", user_num);
+				
 				return "redirect:/user/myPage";
 			}
 			
@@ -116,6 +118,9 @@ public class UsersController {
 				model.addAttribute("user", user);
 				model.addAttribute("dept_name", dept_name);
 			
+				// 마이페이지 접근시 url로 접근하는 것을 막아둔 세션값을 삭제
+				session.removeAttribute("pw_check");
+				
 				return "user/myPage";
 				}
 			else {
@@ -351,7 +356,7 @@ public class UsersController {
 		
 		Users user = (Users) session.getAttribute("users");
 		
-		accounting.setAcc_writer(user.getUser_name());
+		accounting.setAcc_writer(user.getUser_name() + "(" + user.getUser_num() + ")");
 		
 		acc_service.addAccAction(accounting);
 		
