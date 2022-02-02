@@ -18,6 +18,7 @@ import com.erp.service.MyPageService;
 import com.erp.service.ProductService;
 import com.erp.service.SupplierService;
 import com.erp.vo.Accounting;
+import com.erp.vo.Department;
 import com.erp.vo.Product;
 import com.erp.vo.Supplier;
 import com.erp.vo.Users;
@@ -246,7 +247,14 @@ public class UsersController {
 		
 		Users user = (Users) session.getAttribute("users");
 		
-		if(user != null) {
+		if(user == null) {
+			
+			ra.addFlashAttribute("msg", "로그인이 필요합니다!");
+			return "redirect:/";
+			
+		}
+		else {
+			
 			List<Supplier> supp_list = supp_service.getSupplierList();
 			supp_service.getAuth(user.getDept_num());
 
@@ -261,10 +269,6 @@ public class UsersController {
 			model.addAttribute("dept_auth", supp_service.getAuth(user.getDept_num()));
 
 			return "user/supplier";
-		}
-		else {
-			ra.addFlashAttribute("msg", "로그인이 필요합니다!");
-			return "redirect:/";
 		}
 		
 	}
@@ -332,19 +336,27 @@ public class UsersController {
 	public String accounting(Model model, HttpSession session, RedirectAttributes ra) throws Exception {
 		
 		Users user = (Users) session.getAttribute("users");
-		
+
 		if(user == null) {
 			ra.addFlashAttribute("msg", "로그인 먼저 해주세요!");
 			return "redirect:/";
 		}
 		
 		else {
-		
-			List<Accounting> acc_list = acc_service.getAccList();
-			model.addAttribute("acc_list", acc_list);
-			model.addAttribute("users", user);
-			model.addAttribute("dept_auth", supp_service.getAuth(user.getDept_num()));
 			
+			 Department user_auth = supp_service.getAuth(user.getDept_num());
+			 
+			if(user_auth.getAuth_accounting() == 0) {
+				ra.addFlashAttribute("msg", "접근 권한이 없습니다! 관리자에게 문의해주세요!");
+				return "redirect:/user/userMain";
+			}
+			
+			else {
+				List<Accounting> acc_list = acc_service.getAccList();
+				model.addAttribute("acc_list", acc_list);
+				model.addAttribute("users", user);
+				model.addAttribute("dept_auth", user_auth);
+			}
 			return "user/accounting";
 		}
 	}
