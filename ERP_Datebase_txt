@@ -1,24 +1,27 @@
 -- 사용자
 CREATE TABLE USERS (
-	user_num    VARCHAR(20) 	PRIMARY KEY,
-	user_pw     VARCHAR(100) 	NOT NULL,
-	user_name   VARCHAR(20) 	NOT NULL,
-	dept_num    INT 		NOT NULL,
-	user_tel    VARCHAR(20),
-	user_email  VARCHAR(200),
-	user_addr   TEXT
+	user_num 	VARCHAR(20) 	PRIMARY KEY,
+	user_pw 	VARCHAR(100) 	NOT NULL,
+	user_name 	VARCHAR(20) 	NOT NULL,
+	dept_num 	VARCHAR(20) 	NOT NULL,
+	user_tel 	VARCHAR(20),
+	user_email 	VARCHAR(200),
+	user_addr 	TEXT
 );
+
+-- 관리자 계정 
+INSERT INTO USERS VALUES('admin', SHA2('1234',256), '관리자계정', 'ADMIN', null, null, null);
 
 
 
 -- 고객
 CREATE TABLE CLIENTS (
-	clients_num   VARCHAR(50) 	PRIMARY KEY,
-	clients_name  VARCHAR(100) 	NOT NULL,
-	clients_add   TEXT 		NOT NULL,
-	clients_tel   VARCHAR(20) 	NOT NULL,
-	user_num      VARCHAR(20) 	NOT NULL,
-	clients_note  TEXT
+	clients_num 	VARCHAR(50) 	PRIMARY KEY,
+	clients_name 	VARCHAR(100) 	NOT NULL,
+	clients_addr 	TEXT 		NOT NULL,
+	clients_tel 	VARCHAR(20) 	NOT NULL,
+	user_num 	VARCHAR(20) 	NOT NULL,
+	clients_note 	TEXT
 );
 
 
@@ -26,12 +29,12 @@ CREATE TABLE CLIENTS (
 CREATE TABLE SALES(
 	sales_num 	INT	 	PRIMARY KEY,	
 	user_name 	VARCHAR(20) 	NOT NULL,
-	user_num 	VARCHAR(100) 	NOT NULL,
+	user_num 	VARCHAR(20) 	NOT NULL,
 	clients_num 	VARCHAR(100) 	NOT NULL,
 	pro_num 	VARCHAR(100)	NOT NULL,
 	sales_count 	INT	 	NOT NULL,
 	sales_amount 	INT 		NOT NULL,
-	sales_date 	DATE	        NOT NULL,
+	sales_date 	DATE 		NOT NULL,
 	sales_note 	TEXT
 );
 
@@ -50,10 +53,10 @@ CREATE TABLE PRODUCT(
 CREATE TABLE ORDERS (
 	orders_num 	VARCHAR(100) 	PRIMARY KEY,
 	pro_num 	VARCHAR(100) 	NOT NULL,
-	orders_date 	DATE 		NOT NULL,
+	orders_date 	DATE		NOT NULL,
 	rec_date 	DATE 		NOT NULL,
-	orders_count 	INT 		NOT NULL,
-	orders_amount   INT 		NOT NULL,
+	orders_count 	INT		NOT NULL,
+	orders_amount 	INT		NOT NULL,
 	supp_id 	VARCHAR(100) 	NOT NULL
 );
 
@@ -61,8 +64,8 @@ CREATE TABLE ORDERS (
 -- 공급처
 CREATE TABLE SUPPLIER (
 	supp_id 	VARCHAR(100) 	PRIMARY KEY,
-    	supp_name	VARCHAR(50)	NOT NULL,
-	supp_add 	TEXT 		NOT NULL,
+	supp_name	VARCHAR(50)	NOT NULL,
+	supp_addr 	TEXT 		NOT NULL,
 	supp_tel 	VARCHAR(20),
 	user_num 	VARCHAR(20) 	NOT NULL,
 	user_tel 	VARCHAR(20),
@@ -74,24 +77,41 @@ CREATE TABLE SUPPLIER (
 -- 회계
 CREATE TABLE ACCOUNTING (
 	acc_num 	INT 		PRIMARY KEY AUTO_INCREMENT,
+   	acc_payment 	VARCHAR(20)	NOT NULL,
 	acc_ctg 	VARCHAR(100) 	NOT NULL,
+   	acc_occdate 	DATE 		NOT NULL,
 	acc_amount 	INT 		NOT NULL,
-	acc_payment 	VARCHAR(20)	NOT NULL,
-	acc_occdate 	DATE 		NOT NULL,
 	acc_location	VARCHAR(100)	NOT NULL,
+    	acc_writer	VARCHAR(20)	NOT NULL,
 	acc_note 	TEXT
+
 );
 
 
--- 권한부여
-CREATE TABLE AUTH_TABLE (
-	dept_num 	INT PRIMARY KEY,
-	auth_sales 	INT DEFAULT 0,
-	auth_salesList	INT DEFAULT 0,
-	auth_clients 	INT DEFAULT 0,
-	auth_orders 	INT DEFAULT 0,
-	auth_supplier 	INT DEFAULT 0,
-	auth_product	INT DEFAULT 0,
-	auth_accounting	INT DEFAULT -1
+
+SELECT * FROM accounting;
+SELECT * FROM DEPARTMENT;
+
+-- 부서
+CREATE TABLE DEPARTMENT (
+	dept_num		VARCHAR(20) PRIMARY KEY,
+    	dept_name		VARCHAR(20) NOT NULL,
+    	dept_tel		VARCHAR(20),
+	auth_sales 		INT DEFAULT 0,
+	auth_salesList		INT DEFAULT 0,
+	auth_clients 		INT DEFAULT 0,
+	auth_orders 		INT DEFAULT 0,
+	auth_supplier 		INT DEFAULT 0,
+	auth_product		INT DEFAULT 0,
+	auth_accounting		INT DEFAULT 0
 );
--- -- 0 : 검색 불가, 1 : 검색 가능, 2 : 수정 가능, 3 : 검색, 수정 가능
+
+
+-- 기본 부서 등록
+INSERT INTO DEPARTMENT(dept_num, dept_name, dept_tel) VALUES('admin', '관리자', '051-000-0000'); 
+INSERT INTO DEPARTMENT(dept_num, dept_name, dept_tel) VALUES('SAL', '영업부', '051-111-1111'); 
+INSERT INTO DEPARTMENT(dept_num, dept_name, dept_tel) VALUES('HRD', '인사부', '051-222-2222'); 
+INSERT INTO DEPARTMENT(dept_num, dept_name, dept_tel) VALUES('PUR', '구매관리부', '051-333-3333'); 
+INSERT INTO DEPARTMENT(dept_num, dept_name, dept_tel) VALUES('DEF', '배정부서없음','051-444-4444'); 
+
+-- -- 0 : 검색 불가, 1 : 검색만 가능, 2 : 등록만 가능, 3 :  가능
