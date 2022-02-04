@@ -41,7 +41,8 @@
 - **사원 조회**
 ![employee.png](project_main/employee.png)
     - 등록되어 있는 모든 사원을 조회 할 수 있으며 삭제, 수정(사원 번호는 수정 불가)을 할 수 있습니다.
---    
+    
+<hr/>    
 <br/><br/><br/>
 
 - **부서 관리**
@@ -63,8 +64,10 @@
 
 <hr/>      
 <br/><br/><br/>
+
 ### 유저 페이지
 - **유저 메인**
+- 
 ![userMain.png](project_main/userMain.png)
 
 <hr/>
