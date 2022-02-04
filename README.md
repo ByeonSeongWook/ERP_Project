@@ -2,7 +2,7 @@
 # ERP Team Project
 
 ---
-<br/>
+
 ## 1. 프로젝트 소개
 
 ![erp_p_main.png](project_main/erp_p_main.png)
