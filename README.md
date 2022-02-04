@@ -19,17 +19,18 @@
 - 로그인 완료 후 아이디에 User 객체를 세션에 저장하고 그 객체에서 입력한 아이디를 검증을 해서 admin 일 경우 관리자 페이지로 이동, user 일 경우 유저 페이지로 이동하게 했습니다.
 
 ### 관리자 페이지
+- **관리자 메인**
 ![adminMain.png](project_main/adminMain.png)
 --
 <br/><br/>
 
 - **사원 등록**
-    ![add_employee.png](project_main/add_employee.png)
-    ![select_dept.png](project_main/select_dept.png)
-    ![add_employee2.png](project_main/add_employee2.png)
     - 먼저 유저 페이지의 기능을 이용을 하려면 만들어둔 관리자 계정으로 접근 후 사원 등록을 통해 아이디를 등록해야 합니다.
     - 사원 등록 시 이미 등록되어 있는 부서가 있으면 리스트로 모두 불러오게 만들어서 사용자가 선택시 해당 부서에 맞는 사원 번호를 자동으로 배정해줍니다. (부서번호 + 순번)
     - 비밀번호는 기본 비밀번호를 배정하여 사원 등록 후 사용자가 직접 변경 할 수 있도록 했습니다.
+    ![add_employee.png](project_main/add_employee.png)
+    ![select_dept.png](project_main/select_dept.png)
+    ![add_employee2.png](project_main/add_employee2.png)
 --
 <br/><br/><br/>
 
@@ -57,7 +58,9 @@
 --        
 <br/><br/><br/>
 ### 유저 페이지
+- **유저 메인**
 ![userMain.png](project_main/userMain.png)
+--
 <br/><br/><br/>
 
 - **마이 페이지**
@@ -67,6 +70,7 @@
     - 비밀번호 체크 없이 마이페이지로 바로 접근을 하려고 할 시 접근 불가
         - 비밀번호 체크시 세션에 비밀번호 체크 완료 세션을 넣어두고 마이 페이지로 이동하게끔 만들었습니다.
         - 마이페이지에서 수정완료 후 로그인 페이지로 이동(로그아웃)
+--
 <br/><br/><br/>
 
 - **공급처 관리**
@@ -83,7 +87,8 @@
     ![update_supp.png](project_main/update_supp.png)
     - 등록되어 있는 모든 공급처에 대한 조회, 등록, 수정, 삭제를 할 수 있습니다.
     - 페이지 접근시 로그인할때 세션에 넣어둔 User 객체에서 부서 번호를 검증 후 페이지의 권한을 조회해서  권한마다 기능들을 제한 시켰습니다.
-    <br/><br/><br/>
+--
+<br/><br/><br/>
     
 - **회계 관리**
     ![accounting.png](project_main/accounting.png)
@@ -91,6 +96,7 @@
     - 처음 프로젝트 설계시 회계는 간단한 회계단위로만 나누어 놓고 등록만 가능하게 설계를 했습니다.
     - 회계 데이터 등록시 작성자는 세션에 등록된 User의 “이름(사원번호)” 로 등록되게 했습니다.
     - 검색 창은 자주 검색할  것 같은 회계단위, 작성자, 작성일 기준으로 3칸으로 나누어 놨습니다.
+--
 <br/><br/><br/>
 
 
