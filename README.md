@@ -22,7 +22,7 @@
 - **관리자 메인**
 ![adminMain.png](project_main/adminMain.png)
 
---
+<hr/>
 <br/><br/>
 
 - **사원 등록**
